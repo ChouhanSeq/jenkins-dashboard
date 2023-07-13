@@ -38,7 +38,7 @@ const renderBlock = ({ job, name, runs }) => {
   const items = runs.map((run) => {
     const status = run.status;
     const color = colorMap[status];
-    return `<li style="color: ${color}"><a href="https://jenkins-qa.sequoia-development.com/view/${job}/${
+    return `<li style="color: ${color}"><a target="_blank" href="https://jenkins-qa.sequoia-development.com/view/${job}/${
       run.id
     }/console">${run.name}</a> <span class="time">${millisToMinutesAndSeconds(
       run.durationMillis
@@ -48,7 +48,10 @@ const renderBlock = ({ job, name, runs }) => {
   });
   return `
     <div class="block">
-      <h2><a href="${`https://jenkins-qa.sequoia-development.com/view/${job}`}">${name}</a></h2>
+      <h2>
+        <a target="_blank" href="${`https://jenkins-qa.sequoia-development.com/view/${job}`}">${name}</a>
+        <a target="_blank" class="build" href="https://jenkins-qa.sequoia-development.com/view/${job}/build">New Build</a>
+      </h2>
       <ul>${items.join("")}</ul>
     </div>
   `;
@@ -68,7 +71,4 @@ const getData = () => {
 };
 
 getData();
-
-
-
 

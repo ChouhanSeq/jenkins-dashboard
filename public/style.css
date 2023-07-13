@@ -21,6 +21,13 @@ body {
 h2 {
   margin-top: 0;
   margin-bottom: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.build {
+  font-size: 14px;
 }
 
 ul {
