@@ -1,0 +1,47 @@
+html,
+body {
+  min-width: 600px;
+  font-family: sans-serif;
+  font-size: 16px;
+}
+
+#app {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.block {
+  flex: 1 0 350px;
+  background: #fafafa;
+  margin: 8px;
+  padding: 8px 8px 0;
+  border-radius: 2px;
+}
+
+h2 {
+  margin-top: 0;
+  margin-bottom: 8px;
+}
+
+ul {
+  padding-left: 0;
+  list-style: none;
+}
+
+li {
+  margin-bottom: 12px;
+  background-color: #eee;
+  padding: 8px;
+}
+
+.stage {
+  display: block;
+  background-color: #dadada;
+  padding: 2px 4px;
+  border-radius: 2px;
+  margin: 2px;
+}
+
+.time {
+  float: right;
+}
