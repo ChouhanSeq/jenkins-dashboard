@@ -16,3 +16,7 @@ Run the app
 ```bash
 yarn start
 ```
+
+Open the Dashboard at
+
+http://localhost:3000
