@@ -5,6 +5,8 @@ Monitor all FE Apps in one place
 
 ----
 
+> ***NOTE***: *Make sure you're logged into jenkins-qa, else it'll not work.*
+
 ## How to run
 
 Install Dependencies
