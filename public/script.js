@@ -14,6 +14,8 @@ const millisToMinutesAndSeconds = (millis) => {
   return `${minutes ? `${minutes}m ` : ''}${seconds}s`;
 };
 
+const formatStatus = status => status.replace(/_/g, " ");
+
 const renderStages = (status, stages) => {
   if (status !== "IN_PROGRESS") return "";
   return `
@@ -22,9 +24,8 @@ const renderStages = (status, stages) => {
         .map((stage) => {
           return `<span class="stage" style="color: ${
             colorMap[stage.status]
-          }">${stage.name} <span class="status">${stage.status.replace(
-            /_/g,
-            " "
+          }">${stage.name} <span class="status">${formatStatus(
+            stage.status
           )}</span> <span class="time">${millisToMinutesAndSeconds(
             stage.durationMillis
           )}</span></span>`;
@@ -40,9 +41,9 @@ const renderBlock = ({ job, name, runs }) => {
     const color = colorMap[status];
     return `<li style="color: ${color}"><a target="_blank" href="https://jenkins-qa.sequoia-development.com/view/${job}/${
       run.id
-    }/console">${run.name} <span class="status">${
+    }/console">${run.name} <span class="status">${formatStatus(
       run.status
-    }</span></a> <span class="time">${millisToMinutesAndSeconds(
+    )}</span></a> <span class="time">${millisToMinutesAndSeconds(
       run.durationMillis
     )}</span>
     ${renderStages(run.status, run.stages)}
@@ -62,7 +63,7 @@ const renderBlock = ({ job, name, runs }) => {
 const render = (jobs) => {
   const blocks = jobs.map(renderBlock);
   app.innerHTML = blocks.join("");
-  // getData();
+  getData();
 };
 
 const getData = () => {
@@ -73,6 +74,8 @@ const getData = () => {
 };
 
 getData();
+
+
 
 
 

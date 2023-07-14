@@ -74,10 +74,11 @@ li {
 .status {
   font-size: 60%;
   background-color: #00000011;
-  padding: 2px;
+  padding: 2px 4px;
   vertical-align: middle;
   border-radius: 2px;
   line-height: 1;
+  opacity: 0.7;
 }
 
 button {
