@@ -11,8 +11,10 @@ const colorMap = {
 };
 
 const millisToMinutesAndSeconds = (millis) => {
-  const minutes = Math.floor(millis / 60000);
-  const seconds = ((millis % 60000) / 1000).toFixed(0);
+  const milliseconds = Math.abs(millis);
+  const minutes = Math.floor(milliseconds / 60000);
+  const seconds = ((milliseconds % 60000) / 1000).toFixed(0);
+  if (millis < 0) return `Paused ${minutes ? `${minutes}m ` : ""}${seconds}s`;
   return `${minutes ? `${minutes}m ` : ""}${seconds}s`;
 };
 
