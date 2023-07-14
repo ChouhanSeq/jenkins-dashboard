@@ -3,11 +3,10 @@
 ## Description
 Monitor all FE Apps in one place
 
-----
+## How to run
 
 > ***NOTE***: *Make sure you're logged into jenkins-qa, else it'll not work.*
 
-## How to run
 
 Install Dependencies
 ```bash
