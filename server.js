@@ -33,7 +33,12 @@ const jobs = [
 const getJobStatus = (job) =>
   fetch(`https://jenkins-qa.sequoia-development.com/view/${job}/wfapi/runs`)
     .then((res) => res.json())
-    .then((data) => data.filter((item) => item.name.indexOf("-PR-") === -1));
+    .then((data) =>
+      data.filter(
+        (item) =>
+          item.name.indexOf("-PR-") === -1 && item.name.indexOf("-") !== -1
+      )
+    );
 
 app.get("/status", async (_req, res) => {
   const statuses = await Promise.all(jobs.map(({ job }) => getJobStatus(job)));

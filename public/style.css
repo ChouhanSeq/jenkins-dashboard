@@ -33,7 +33,7 @@ a {
 
 h2 {
   margin-top: 0;
-  margin-bottom: 8px;
+  margin-bottom: 16px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -87,4 +87,16 @@ button {
   border-radius: 4px;
   padding: 4px 8px;
   cursor: pointer;
+}
+
+.aborted {
+  text-decoration: line-through;
+}
+
+.empty {
+  min-height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-style: italic;
 }
