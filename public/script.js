@@ -42,11 +42,12 @@ const renderStages = (status, stages) => {
 };
 
 const renderBlock = ({ job, name, runs }) => {
-  const items = runs.map((run) => {
-    const status = run.status;
-    const color = colorMap[status];
-    const isAborted = run.status === "ABORTED";
-    return `
+  const items = runs
+    .map((run) => {
+      const status = run.status;
+      const color = colorMap[status];
+      const isAborted = run.status === "ABORTED";
+      return `
       <li style="color: ${color}" class="${isAborted ? "aborted" : ""}" >
         <a target="_blank" href="${baseUrl}/${job}/${run.id}/console" >
           <span>${run.name}</span>
@@ -60,7 +61,8 @@ const renderBlock = ({ job, name, runs }) => {
         ${renderStages(run.status, run.stages)}
       </li>
     `;
-  });
+    })
+    .join("");
 
   return `
     <div class="block">
@@ -71,8 +73,8 @@ const renderBlock = ({ job, name, runs }) => {
         </a>
       </h2>
       ${
-        items?.length
-          ? `<ul>${items.join("")}</ul>`
+        runs?.length
+          ? `<ul>${items}</ul>`
           : '<div class="empty">No Recent Deployments</div>'
       }
     </div>
