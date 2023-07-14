@@ -11,7 +11,7 @@ const colorMap = {
 const millisToMinutesAndSeconds = (millis) => {
   const minutes = Math.floor(millis / 60000);
   const seconds = ((millis % 60000) / 1000).toFixed(0);
-  return `${minutes}:${seconds < 10 ? "0" : ""}${seconds}`;
+  return `${minutes ? `${minutes}m ` : ''}${seconds}s`;
 };
 
 const renderStages = (status, stages) => {
@@ -22,10 +22,10 @@ const renderStages = (status, stages) => {
         .map((stage) => {
           return `<span class="stage" style="color: ${
             colorMap[stage.status]
-          }">${stage.name} [${stage.status.replace(
+          }">${stage.name} <span class="status">${stage.status.replace(
             /_/g,
             " "
-          )}] <span class="time">${millisToMinutesAndSeconds(
+          )}</span> <span class="time">${millisToMinutesAndSeconds(
             stage.durationMillis
           )}</span></span>`;
         })
@@ -40,7 +40,9 @@ const renderBlock = ({ job, name, runs }) => {
     const color = colorMap[status];
     return `<li style="color: ${color}"><a target="_blank" href="https://jenkins-qa.sequoia-development.com/view/${job}/${
       run.id
-    }/console">${run.name}</a> <span class="time">${millisToMinutesAndSeconds(
+    }/console">${run.name} <span class="status">${
+      run.status
+    }</span></a> <span class="time">${millisToMinutesAndSeconds(
       run.durationMillis
     )}</span>
     ${renderStages(run.status, run.stages)}
@@ -50,7 +52,7 @@ const renderBlock = ({ job, name, runs }) => {
     <div class="block">
       <h2>
         <a target="_blank" href="${`https://jenkins-qa.sequoia-development.com/view/${job}`}">${name}</a>
-        <a target="_blank" class="build" href="https://jenkins-qa.sequoia-development.com/view/${job}/build">New Build</a>
+        <a target="_blank" class="build" href="https://jenkins-qa.sequoia-development.com/view/${job}/build"><button>New Build</button></a>
       </h2>
       <ul>${items.join("")}</ul>
     </div>
@@ -60,7 +62,7 @@ const renderBlock = ({ job, name, runs }) => {
 const render = (jobs) => {
   const blocks = jobs.map(renderBlock);
   app.innerHTML = blocks.join("");
-  getData();
+  // getData();
 };
 
 const getData = () => {
@@ -71,4 +73,6 @@ const getData = () => {
 };
 
 getData();
+
+
 
