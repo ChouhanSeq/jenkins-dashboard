@@ -1,4 +1,5 @@
 const express = require("express");
+const shrinkRay = require("shrink-ray-current");
 const app = express();
 const port = 3000;
 
@@ -40,6 +41,8 @@ const getJobStatus = (job) =>
       )
     );
 
+app.use(shrinkRay());
+
 app.get("/status", async (_req, res) => {
   const statuses = await Promise.all(jobs.map(({ job }) => getJobStatus(job)));
   res.send(
@@ -61,4 +64,7 @@ app.listen(port, () => {
   console.clear();
   console.log(`Jenkins Dashboard Running. Open http://localhost:${port}`);
 });
+
+
+
 

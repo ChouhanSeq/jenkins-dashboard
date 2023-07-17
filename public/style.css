@@ -1,13 +1,64 @@
+:root {
+  --color: "#000";
+  --background: #fff;
+  --block: #00000009;
+  --line-item: #0000000f;
+  --stage-item: #00000011;
+  --border: #00000033;
+  --green: green;
+  --red: red;
+  --blue: #204fff;
+  --grey: grey;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color: #fff;
+    --background: #000;
+    --block: #ffffff09;
+    --line-item: #ffffff0f;
+    --stage-item: #ffffff11;
+    --border: #ffffff33;
+    --green: green;
+    --red: red;
+    --blue: #2f86fb;
+    --grey: grey;
+  }
+}
+
+.green {
+  color: var(--green);
+}
+.red {
+  color: var(--red);
+}
+.blue {
+  color: var(--blue);
+}
+.grey {
+  color: var(--grey);
+}
+
 html,
 body {
   font-family: sans-serif;
   font-size: 16px;
+  background: var(--background);
+  color: var(--color);
+  min-width: 450px;
 }
 
 h1 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   padding: 0 16px;
-  text-align: center;
   margin-bottom: 60px;
+}
+
+h1 img {
+  height: 100px;
+  margin-right: 32px;
 }
 
 a {
@@ -24,14 +75,14 @@ a {
 }
 
 .block {
-  background: #fafafa;
+  background: var(--block);
   padding: 8px 8px 0;
   border-radius: 4px;
 }
 
 h2 {
-  margin-top: 0;
   margin-bottom: 16px;
+  margin-top: 8px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -48,16 +99,26 @@ ul {
 
 li {
   margin-bottom: 12px;
-  background-color: #eee;
+  background-color: var(--line-item);
   padding: 6px 8px;
 }
 
 .stage {
   display: block;
-  background-color: #dadada;
-  padding: 2px 4px;
-  border-radius: 4px;
+  background-color: var(--stage-item);
+  padding: 4px 8px;
   margin: 2px;
+  font-size: 16px;
+}
+
+.stage:first-child {
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+}
+
+.stage:last-child {
+  border-bottom-left-radius: 4px;
+  border-bottom-right-radius: 4px;
 }
 
 .time {
@@ -71,7 +132,7 @@ li {
 
 .status {
   font-size: 60%;
-  background-color: #00000011;
+  background-color: var(--stage-item);
   padding: 2px 4px;
   vertical-align: middle;
   border-radius: 2px;
@@ -80,8 +141,9 @@ li {
 }
 
 button {
-  background: white;
-  border: 1px solid #ccc;
+  background: var(--background);
+  color: var(--color);
+  border: 1px solid var(--border);
   border-radius: 4px;
   padding: 4px 8px;
   cursor: pointer;
@@ -98,3 +160,4 @@ button {
   justify-content: center;
   font-style: italic;
 }
+

@@ -6,9 +6,9 @@ const colorMap = {
   SUCCESS: "green",
   FAILED: "red",
   IN_PROGRESS: "blue",
-  UNSTABLE: "grey",
-  NOT_EXECUTED: "grey",
 };
+
+const getColor = (status) => colorMap[status] || "grey";
 
 const millisToMinutesAndSeconds = (millis) => {
   const milliseconds = Math.abs(millis);
@@ -27,7 +27,7 @@ const renderStages = (status, stages) => {
       ${stages
         .map((stage) => {
           return `
-            <span class="stage" style="color: ${colorMap[stage.status]}">
+            <span class="stage ${getColor(stage.status)}">
               <span>${stage.name}</span>
               <span class="status">
                 ${formatStatus(stage.status)}
@@ -47,10 +47,10 @@ const renderBlock = ({ job, name, runs }) => {
   const items = runs
     .map((run) => {
       const status = run.status;
-      const color = colorMap[status];
+      const color = getColor(status);
       const isAborted = run.status === "ABORTED";
       return `
-      <li style="color: ${color}" class="${isAborted ? "aborted" : ""}" >
+      <li class="${color} ${isAborted ? "aborted" : ""}" >
         <a target="_blank" href="${baseUrl}/${job}/${run.id}/console" >
           <span>${run.name}</span>
           <span class="status">
