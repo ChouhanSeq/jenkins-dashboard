@@ -41,17 +41,24 @@ const getJobStatus = (job) =>
       )
     );
 
+let statusCache = [];
+
+const getStatuses = async () => {
+  const statuses = await Promise.all(jobs.map(({ job }) => getJobStatus(job)));
+  statusCache = jobs.map(({ name, job }, index) => ({
+    job,
+    name: name,
+    runs: statuses[index],
+  }));
+  getStatuses();
+};
+
+getStatuses();
+
 app.use(shrinkRay());
 
 app.get("/status", async (_req, res) => {
-  const statuses = await Promise.all(jobs.map(({ job }) => getJobStatus(job)));
-  res.send(
-    jobs.map(({ name, job }, index) => ({
-      job,
-      name: name,
-      runs: statuses[index],
-    }))
-  );
+  res.send(statusCache);
 });
 
 app.get("/", (_req, res) => {
@@ -64,7 +71,5 @@ app.listen(port, () => {
   console.clear();
   console.log(`Jenkins Dashboard Running. Open http://localhost:${port}`);
 });
-
-
 
 

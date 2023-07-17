@@ -86,7 +86,6 @@ const renderBlock = ({ job, name, runs }) => {
 const render = (jobs) => {
   const blocks = jobs.map(renderBlock);
   app.innerHTML = blocks.join("");
-  getData();
 };
 
 const getData = () => {
@@ -96,5 +95,7 @@ const getData = () => {
     .catch(console.error);
 };
 
-getData();
+setInterval(() => {
+  getData();
+}, 500);
 
