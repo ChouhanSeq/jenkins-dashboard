@@ -84,6 +84,14 @@ const renderBlock = ({ job, name, runs }) => {
 };
 
 const render = (jobs) => {
+  if (jobs.length === 0) {
+    return (app.innerHTML = `
+      <div class="disclaimer">
+        Loading
+      </div>
+    `);
+  }
+
   const blocks = jobs.map(renderBlock);
   app.innerHTML = blocks.join("");
 };
@@ -92,10 +100,15 @@ const getData = () => {
   fetch("/status")
     .then((res) => res.json())
     .then(render)
-    .catch(console.error);
+    .catch((_err) => {
+      app.innerHTML = `
+        <div class="disclaimer red">
+          Logged Out
+        </div>`;
+    });
 };
 
 setInterval(() => {
   getData();
-}, 500);
+}, 1000);
 

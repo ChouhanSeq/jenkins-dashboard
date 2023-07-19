@@ -161,3 +161,11 @@ button {
   font-style: italic;
 }
 
+.disclaimer {
+  font-size: 20px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 400px;
+}

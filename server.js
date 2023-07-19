@@ -1,7 +1,7 @@
 const express = require("express");
 const shrinkRay = require("shrink-ray-current");
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000;
 
 const jobs = [
   { name: "Adminshell", job: "kernel/job/pp-kernel-adminshell-frontend" },
@@ -44,13 +44,22 @@ const getJobStatus = (job) =>
 let statusCache = [];
 
 const getStatuses = async () => {
-  const statuses = await Promise.all(jobs.map(({ job }) => getJobStatus(job)));
-  statusCache = jobs.map(({ name, job }, index) => ({
-    job,
-    name: name,
-    runs: statuses[index],
-  }));
-  getStatuses();
+  try {
+    const statuses = await Promise.all(
+      jobs.map(({ job }) => getJobStatus(job))
+    );
+    statusCache = jobs.map(({ name, job }, index) => ({
+      job,
+      name: name,
+      runs: statuses[index],
+    }));
+    getStatuses();
+  } catch (err) {
+    statusCache = "error";
+    setTimeout(() => {
+      getStatuses();
+    }, 1000);
+  }
 };
 
 getStatuses();
@@ -58,6 +67,9 @@ getStatuses();
 app.use(shrinkRay());
 
 app.get("/status", async (_req, res) => {
+  if (statusCache === "error") {
+    return res.status(400).send('Error');
+  }
   res.send(statusCache);
 });
 
@@ -71,5 +83,4 @@ app.listen(port, () => {
   console.clear();
   console.log(`Jenkins Dashboard Running. Open http://localhost:${port}`);
 });
-
 
