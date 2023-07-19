@@ -14,7 +14,7 @@
 @media (prefers-color-scheme: dark) {
   :root {
     --color: #fff;
-    --background: #000;
+    --background: #111;
     --block: #ffffff09;
     --line-item: #ffffff0f;
     --stage-item: #ffffff11;
@@ -71,7 +71,7 @@ a {
 #app {
   display: grid;
   grid-gap: 16px;
-  grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
 }
 
 .block {
@@ -132,7 +132,7 @@ li {
 
 .status {
   font-size: 60%;
-  background-color: var(--stage-item);
+  background-color: var(--background);
   padding: 2px 4px;
   vertical-align: middle;
   border-radius: 2px;
