@@ -81,7 +81,7 @@ a {
 }
 
 h2 {
-  margin-bottom: 16px;
+  margin-bottom: 8px;
   margin-top: 8px;
   display: flex;
   justify-content: space-between;
@@ -169,3 +169,11 @@ button {
   justify-content: center;
   min-height: 400px;
 }
+
+.job-name {
+  font-size: 14px;
+  font-weight: normal;
+  margin: 0;
+  margin-bottom: 8px;
+}
+

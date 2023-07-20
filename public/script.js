@@ -10,12 +10,16 @@ const colorMap = {
 
 const getColor = (status) => colorMap[status] || "grey";
 
-const millisToMinutesAndSeconds = (millis) => {
+const millisToHoursMinutesAndSeconds = (millis) => {
   const milliseconds = Math.abs(millis);
-  const minutes = Math.floor(milliseconds / 60000);
+  const hours = Math.floor(milliseconds / 3600000);
+  const minutes = Math.floor((milliseconds % 3600000) / 60000);
   const seconds = ((milliseconds % 60000) / 1000).toFixed(0);
-  if (millis < 0) return `Paused ${minutes ? `${minutes}m ` : ""}${seconds}s`;
-  return `${minutes ? `${minutes}m ` : ""}${seconds}s`;
+  const time = `${hours ? `${hours}h ` : ""}${minutes ? `${minutes}m ` : ""}${
+    seconds ? `${seconds}s` : ""
+  }`;
+  if (millis < 0) return `Paused ${time}`;
+  return time;
 };
 
 const formatStatus = (status) => status.replace(/_/g, " ");
@@ -33,7 +37,7 @@ const renderStages = (status, stages) => {
                 ${formatStatus(stage.status)}
               </span>
               <span class="time">
-                ${millisToMinutesAndSeconds(stage.durationMillis)}
+                ${millisToHoursMinutesAndSeconds(stage.durationMillis)}
               </span>
             </span>
           `;
@@ -58,7 +62,7 @@ const renderBlock = ({ job, name, runs }) => {
           </span>
         </a>
         <span class="time">
-          ${millisToMinutesAndSeconds(run.durationMillis)}
+          ${millisToHoursMinutesAndSeconds(run.durationMillis)}
         </span>
         ${renderStages(run.status, run.stages)}
       </li>
@@ -69,11 +73,18 @@ const renderBlock = ({ job, name, runs }) => {
   return `
     <div class="block">
       <h2>
-        <a target="_blank" href="${`${baseUrl}/${job}`}">${name}</a>
+        <a target="_blank" href="${`${baseUrl}/${job}`}">
+          ${name}
+        </a>
         <a target="_blank" class="build" href="${baseUrl}/${job}/build">
           <button>New Build</button>
         </a>
       </h2>
+      <p class="job-name">
+        <a target="_blank" href="${`${baseUrl}/${job}`}">
+          <b>Job :</b> ${job}
+        </a>
+      </p>
       ${
         runs?.length
           ? `<ul>${items}</ul>`
@@ -111,4 +122,5 @@ const getData = () => {
 setInterval(() => {
   getData();
 }, 1000);
+
 

@@ -14,20 +14,20 @@ const jobs = [
     job: "SP-benefits-wellbeing/job/pp-sp-benefits-px-frontend",
   },
   {
-    name: "Kernel",
-    job: "kernel/job/pp-kernel-frontend",
-  },
-  {
-    name: "UWP",
-    job: "S1-S1/job/pp-po-s1-frontend",
+    name: "TR",
+    job: "TR-totalrewards/job/pp-ptr-totalrewards-frontend",
   },
   {
     name: "Wellbeing",
     job: "SP-benefits-wellbeing/job/pp-sp-wellbeing-frontend",
   },
   {
-    name: "TR",
-    job: "TR-totalrewards/job/pp-ptr-totalrewards-frontend",
+    name: "Kernel",
+    job: "kernel/job/pp-kernel-frontend",
+  },
+  {
+    name: "UWP",
+    job: "S1-S1/job/pp-po-s1-frontend",
   },
 ];
 
@@ -83,4 +83,6 @@ app.listen(port, () => {
   console.clear();
   console.log(`Jenkins Dashboard Running. Open http://localhost:${port}`);
 });
+
+
 
