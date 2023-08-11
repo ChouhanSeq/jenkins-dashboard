@@ -1,31 +1,33 @@
-const app = document.getElementById("app");
+const app = document.getElementById('app');
 
-const baseUrl = "https://jenkins-qa.sequoia-development.com/view";
+const baseUrl = 'https://jenkins-qa.sequoia-development.com/view';
 
 const colorMap = {
-  SUCCESS: "green",
-  FAILED: "red",
-  IN_PROGRESS: "blue",
+  SUCCESS: 'green',
+  FAILED: 'red',
+  IN_PROGRESS: 'blue',
 };
 
-const getColor = (status) => colorMap[status] || "grey";
+const getColor = (status) => colorMap[status] || 'grey';
 
 const millisToHoursMinutesAndSeconds = (millis) => {
   const milliseconds = Math.abs(millis);
   const hours = Math.floor(milliseconds / 3600000);
   const minutes = Math.floor((milliseconds % 3600000) / 60000);
   const seconds = ((milliseconds % 60000) / 1000).toFixed(0);
-  const time = `${hours ? `${hours}h ` : ""}${minutes ? `${minutes}m ` : ""}${
-    seconds ? `${seconds}s` : ""
+  const time = `${hours ? `${hours}h ` : ''}${minutes ? `${minutes}m ` : ''}${
+    seconds ? `${seconds}s` : ''
   }`;
   if (millis < 0) return `Paused ${time}`;
   return time;
 };
 
-const formatStatus = (status) => status.replace(/_/g, " ");
+const formatStatus = (status) => status.replace(/_/g, ' ');
+
+let activeTab = localStorage.tab || '';
 
 const renderStages = (status, stages) => {
-  if (status !== "IN_PROGRESS") return "";
+  if (status !== 'IN_PROGRESS') return '';
   return `
     <div class="progress">
       ${stages
@@ -42,7 +44,7 @@ const renderStages = (status, stages) => {
             </span>
           `;
         })
-        .join("")}
+        .join('')}
     </div>
     `;
 };
@@ -52,9 +54,9 @@ const renderBlock = ({ job, name, runs }) => {
     .map((run) => {
       const status = run.status;
       const color = getColor(status);
-      const isAborted = run.status === "ABORTED";
+      const isAborted = run.status === 'ABORTED';
       return `
-      <li class="${color} ${isAborted ? "aborted" : ""}" >
+      <li class="${color} ${isAborted ? 'aborted' : ''}" >
         <a target="_blank" href="${baseUrl}/${job}/${run.id}/console" >
           <span>${run.name}</span>
           <span class="status">
@@ -68,7 +70,7 @@ const renderBlock = ({ job, name, runs }) => {
       </li>
     `;
     })
-    .join("");
+    .join('');
 
   return `
     <div class="block">
@@ -94,21 +96,43 @@ const renderBlock = ({ job, name, runs }) => {
   `;
 };
 
-const render = (jobs) => {
-  if (jobs.length === 0) {
-    return (app.innerHTML = `
+const render = (dashboards) => {
+  if (dashboards.length === 0) {
+    app.innerHTML = `
       <div class="disclaimer">
         Loading
       </div>
-    `);
+    `;
+    return;
   }
-
-  const blocks = jobs.map(renderBlock);
-  app.innerHTML = blocks.join("");
+  activeTab = activeTab ? activeTab : dashboards[0].name;
+  const tabs = `
+    <ul class="tabs">
+      ${dashboards
+        .map(
+          ({ name }) =>
+            `<li class="tab ${
+              activeTab === name ? 'active' : ''
+            }"> ${name} </li>`,
+        )
+        .join('')}
+    </ul>
+  `;
+  const appContent = dashboards
+    .map(({ name, jobs }) => {
+      const blocks = jobs.map(renderBlock);
+      return `
+        <div class="blocks ${
+          activeTab === name ? 'active' : ''
+        }" data-tab="${name}" >${blocks.join('')}</div>
+      `;
+    })
+    .join('');
+  app.innerHTML = tabs + appContent;
 };
 
 const getData = () => {
-  fetch("/status")
+  fetch('/status')
     .then((res) => res.json())
     .then(render)
     .catch((_err) => {
@@ -123,4 +147,28 @@ setInterval(() => {
   getData();
 }, 1000);
 
+getData();
 
+const activateTab = (tab) => {
+  const tabs = document.querySelectorAll('.tab');
+  tabs.forEach((t) => t.classList.remove('active'));
+  tab.classList.add('active');
+};
+
+const activateBlock = (tab) => {
+  const block = document.querySelector(`.blocks[data-tab="${tab}"]`);
+  const blocks = document.querySelectorAll('.blocks');
+  blocks.forEach((b) => b.classList.remove('active'));
+  block.classList.add('active');
+};
+
+document.addEventListener('click', (e) => {
+  const tab = e.target.closest('.tab');
+  if (tab) {
+    const tabName = tab.innerText;
+    localStorage.setItem('tab', tabName);
+    activeTab = tabName;
+    activateTab(tab);
+    activateBlock(tabName);
+  }
+});

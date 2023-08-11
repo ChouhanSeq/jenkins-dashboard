@@ -29,12 +29,15 @@
 .green {
   color: var(--green);
 }
+
 .red {
   color: var(--red);
 }
+
 .blue {
   color: var(--blue);
 }
+
 .grey {
   color: var(--grey);
 }
@@ -68,7 +71,11 @@ a {
   vertical-align: middle;
 }
 
-#app {
+.blocks {
+  display: none;
+}
+
+.blocks.active {
   display: grid;
   grid-gap: 16px;
   grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
@@ -177,3 +184,21 @@ button {
   margin-bottom: 8px;
 }
 
+.tabs {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.tab {
+  padding: 8px 16px;
+  border: 1px solid var(--border);
+  background: var(--background);
+  border-radius: 20px;
+  margin-right: 16px;
+  cursor: pointer;
+}
+
+.tab.active {
+  background: var(--line-item);
+}

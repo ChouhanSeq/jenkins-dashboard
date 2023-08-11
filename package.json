@@ -13,7 +13,7 @@
     "nodemon": "^3.0.1"
   },
   "scripts": {
-    "start": "PORT=3001 pm2 start server.js --name jenkins",
+    "start": "NODE_ENV=production pm2 start server.js --name jenkins",
     "stop": "pm2 delete jenkins",
     "restart": "pm2 restart jenkins",
     "dev": "nodemon server.js"
