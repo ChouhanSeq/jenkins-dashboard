@@ -196,9 +196,13 @@ button {
   background: var(--background);
   border-radius: 20px;
   margin-right: 16px;
+  min-width: 100px;
   cursor: pointer;
+  text-align: center;
+  opacity: 0.8;
 }
 
 .tab.active {
   background: var(--line-item);
+  opacity: 1;
 }
