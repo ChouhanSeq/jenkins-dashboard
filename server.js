@@ -35,7 +35,6 @@ const getDashboards = async () => {
 };
 
 const getStatuses = async ({ name, jobs }) => {
-  // try {
   const statuses = await Promise.all(jobs.map(({ job }) => getJobStatus(job)));
   return {
     name,
@@ -45,13 +44,6 @@ const getStatuses = async ({ name, jobs }) => {
       runs: statuses[index],
     })),
   };
-  //   getStatuses();
-  // } catch (err) {
-  //   statusCache = 'error';
-  //   setTimeout(() => {
-  //     getStatuses();
-  //   }, 1000);
-  // }
 };
 
 getDashboards();

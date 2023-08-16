@@ -1,8 +1,6 @@
 module.exports = [
   {
     name: 'FE Stable',
-    port: 3001,
-    devPort: 3000,
     jobs: [
       { name: 'Adminshell', job: 'kernel/job/pp-kernel-adminshell-frontend' },
       {
@@ -28,17 +26,6 @@ module.exports = [
       {
         name: 'UWP',
         job: 'S1-S1/job/pp-po-s1-frontend',
-      },
-    ],
-  },
-  {
-    name: 'FE Experimental',
-    port: 3003,
-    devPort: 3002,
-    jobs: [
-      {
-        name: 'Adminshell',
-        job: 'local-test/job/pp-kernel-adminshell-frontend-cloudfront',
       },
     ],
   },
