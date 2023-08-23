@@ -1,6 +1,6 @@
 const app = document.getElementById('app');
 
-const baseUrl = 'https://jenkins-qa.sequoia-development.com/view';
+const baseUrl = 'https://jenkins-qa.sequoia-development.com/job';
 
 const colorMap = {
   SUCCESS: 'green',
@@ -51,7 +51,7 @@ const renderStages = (status, stages) => {
 
 const renderBlock = ({ job, name, runs }) => {
   const items = runs
-    .map((run) => {
+    ?.map((run) => {
       const status = run.status;
       const color = getColor(status);
       const isAborted = run.status === 'ABORTED';
@@ -88,9 +88,11 @@ const renderBlock = ({ job, name, runs }) => {
         </a>
       </p>
       ${
-        runs?.length
-          ? `<ul>${items}</ul>`
-          : '<div class="empty">No Recent Deployments</div>'
+        runs
+          ? runs.length
+            ? `<ul>${items}</ul>`
+            : '<div class="empty">No Recent Deployments</div>'
+          : '<div class="empty">Some other Error</div>'
       }
     </div>
   `;
@@ -105,6 +107,7 @@ const render = (dashboards) => {
     `;
     return;
   }
+
   activeTab = activeTab ? activeTab : dashboards[0].name;
   const tabs = `
     <ul class="tabs">

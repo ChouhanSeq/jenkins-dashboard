@@ -8,7 +8,7 @@ const finalPort =
   process.env.PORT || process.env.NODE_ENV === 'production' ? 3001 : 3000;
 
 const getJobStatus = (job) =>
-  fetch(`https://jenkins-qa.sequoia-development.com/view/${job}/wfapi/runs`)
+  fetch(`https://jenkins-qa.sequoia-development.com/job/${job}/wfapi/runs`)
     .then((res) => res.json())
     .then((data) =>
       data.filter(
@@ -20,10 +20,10 @@ let statusCache = [];
 
 const getDashboards = async () => {
   try {
-    const dashboardResponses = await Promise.all(
+    const dashboardResponses = await Promise.allSettled(
       dashboards.map(({ name, jobs }) => getStatuses({ name, jobs })),
     );
-    statusCache = dashboardResponses;
+    statusCache = dashboardResponses.map(({ value }) => value);
     getDashboards();
   } catch (_err) {
     statusCache = 'error';
@@ -34,14 +34,19 @@ const getDashboards = async () => {
 };
 
 const getStatuses = async ({ name, jobs }) => {
-  const statuses = await Promise.all(jobs.map(({ job }) => getJobStatus(job)));
+  const statuses = await Promise.allSettled(
+    jobs.map(({ job }) => getJobStatus(job)),
+  );
   return {
     name,
-    jobs: jobs.map(({ name, job }, index) => ({
-      job,
-      name: name,
-      runs: statuses[index],
-    })),
+    jobs: jobs.map(({ name, job }, index) => {
+      // console.log(name, job, statuses[index]);
+      return {
+        job,
+        name: name,
+        runs: statuses[index].value,
+      };
+    }),
   };
 };
 
