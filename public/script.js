@@ -147,9 +147,9 @@ const getData = () => {
     });
 };
 
-// setInterval(() => {
-//   getData();
-// }, 1000);
+setInterval(() => {
+  getData();
+}, 1000);
 
 getData();
 
