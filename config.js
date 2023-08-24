@@ -1,6 +1,6 @@
 module.exports = [
   {
-    name: 'FE Stable',
+    name: 'FE',
     jobs: [
       { name: 'Adminshell', job: 'pp-kernel-adminshell-frontend' },
       {
