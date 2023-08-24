@@ -111,6 +111,7 @@ const render = (dashboards) => {
   activeTab = activeTab ? activeTab : dashboards[0].name;
   const tabs = `
     <ul class="tabs">
+      <img src="/${true ? 'logo.png' : 'logo_evil.svg'}" alt />
       ${dashboards
         .map(
           ({ name }) =>
@@ -146,9 +147,9 @@ const getData = () => {
     });
 };
 
-setInterval(() => {
-  getData();
-}, 1000);
+// setInterval(() => {
+//   getData();
+// }, 1000);
 
 getData();
 
