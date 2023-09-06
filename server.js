@@ -42,14 +42,11 @@ const getStatuses = async ({ name, jobs, baseUrl }) => {
   return {
     name,
     baseUrl,
-    jobs: jobs.map(({ name, job }, index) => {
-      // console.log(name, job, statuses[index]);
-      return {
-        job,
-        name: name,
-        runs: statuses[index].value,
-      };
-    }),
+    jobs: jobs.map(({ name, job }, index) => ({
+      job,
+      name: name,
+      runs: statuses[index].value,
+    })),
   };
 };
 
