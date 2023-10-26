@@ -28,6 +28,10 @@ module.exports = [
         name: "UWP",
         job: "pp-po-s1-frontend",
       },
+      {
+        name: "Eureka",
+        job: "pp-kernel-eureka-frontend",
+      },
     ],
   },
   {
@@ -59,9 +63,15 @@ module.exports = [
         name: "UWP",
         job: "pp-po-s1-frontend",
       },
+      {
+        name: "Eureka",
+        job: "pp-kernel-eureka-frontend",
+      },
     ],
   },
 ];
+
+
 
 
 
