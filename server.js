@@ -5,7 +5,7 @@ const dashboards = require("./config");
 const app = express();
 
 const finalPort =
-  process.env.PORT || process.env.NODE_ENV === "production" ? 3001 : 3000;
+  process.env.PORT || process.env.NODE_ENV === "production" ? 3001 : 3002;
 
 const getJobStatus = (job, baseUrl) =>
   fetch(`${baseUrl}/job/${job}/wfapi/runs`)
