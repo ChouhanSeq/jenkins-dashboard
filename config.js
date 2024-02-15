@@ -32,6 +32,10 @@ module.exports = [
         name: "Eureka",
         job: "pp-kernel-eureka-frontend",
       },
+      {
+        name: "IDM",
+        job: "pp-kernel-idm-frontend",
+      },
     ],
   },
   {
@@ -67,9 +71,15 @@ module.exports = [
         name: "Eureka",
         job: "pp-kernel-eureka-frontend",
       },
+      {
+        name: "IDM",
+        job: "pp-kernel-idm-frontend",
+      },
     ],
   },
 ];
+
+
 
 
 

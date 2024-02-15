@@ -56,9 +56,11 @@ const renderBlock = ({ job, name, runs }, baseUrl) => {
       const color = getColor(status);
       const isAborted = run.status === "ABORTED";
       return `
-      <li class="${color} ${isAborted ? "aborted" : ""}" >
-        <a target="_blank" href="${baseUrl}/job/${job}/${run.id}/console" >
-          <span>${run.name}</span>
+      <li class="item ${color} ${isAborted ? "aborted" : ""}" >
+        <a target="_blank" href="${baseUrl}/job/${job}/${
+        run.id
+      }/console" class="flow">
+          <span class="name" >${run.name}</span>
           <span class="status">
             ${formatStatus(run.status)}
           </span>
@@ -110,17 +112,21 @@ const render = (dashboards) => {
 
   activeTab = activeTab ? activeTab : dashboards[0].name;
   const tabs = `
-    <ul class="tabs">
-      <img src="/${true ? "logo.png" : "logo_evil.svg"}" alt />
-      ${dashboards
-        .map(
-          ({ name }) =>
-            `<li class="tab ${
-              activeTab === name ? "active" : ""
-            }"> ${name} </li>`
-        )
-        .join("")}
-    </ul>
+    <div class="tabs-wrapper">
+      <ul class="tabs">
+        ${dashboards
+          .map(
+            ({ name }) =>
+              `<li class="tab ${
+                activeTab === name ? "active" : ""
+              }"> ${name} </li>`
+          )
+          .join("")}
+      </ul>
+      <a href="https://github.com/pratyushseq/jenkins-dashboard" target="_blank">
+        <img src="/${true ? "logo.png" : "logo_evil.svg"}" alt />
+      </a>
+    </div>
   `;
   const appContent = dashboards
     .map(({ name, jobs, baseUrl }) => {
