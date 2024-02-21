@@ -22,6 +22,8 @@ const millisToHoursMinutesAndSeconds = (millis) => {
   return time;
 };
 
+const zeroPad = (num) => (num < 10 ? `0${num}` : num);
+
 const formatStatus = (status) => status.replace(/_/g, " ");
 
 let activeTab = localStorage.tab || "";
@@ -55,6 +57,10 @@ const renderBlock = ({ job, name, runs }, baseUrl) => {
       const status = run.status;
       const color = getColor(status);
       const isAborted = run.status === "ABORTED";
+      const startTime = new Date(run.startTimeMillis);
+      const formattedStartTime = `${zeroPad(startTime.getHours())}:${zeroPad(
+        startTime.getMinutes()
+      )}`;
       return `
       <li class="item ${color} ${isAborted ? "aborted" : ""}" >
         <a target="_blank" href="${baseUrl}/job/${job}/${
@@ -67,6 +73,7 @@ const renderBlock = ({ job, name, runs }, baseUrl) => {
         </a>
         <span class="time">
           ${millisToHoursMinutesAndSeconds(run.durationMillis)}
+          <span class="status big">${formattedStartTime}</span>
         </span>
         ${renderStages(run.status, run.stages)}
       </li>
@@ -182,4 +189,5 @@ document.addEventListener("click", (e) => {
     activateBlock(tabName);
   }
 });
+
 

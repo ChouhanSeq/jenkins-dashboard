@@ -151,6 +151,8 @@ li {
 .time {
   float: right;
   font-size: 14px;
+  display: flex;
+  align-items: center;
 }
 
 .progress {
@@ -167,6 +169,10 @@ li {
   line-height: 1;
   opacity: 0.7;
   margin-left: 4px;
+}
+
+.status.big {
+  font-size: 90%;
 }
 
 button {
