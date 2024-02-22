@@ -34,9 +34,18 @@ const renderStages = (status, stages) => {
     <div class="progress">
       ${stages
         .map((stage) => {
+          const startTime = new Date(stage.startTimeMillis);
+          const formattedStartTime = `${zeroPad(
+            startTime.getHours()
+          )}:${zeroPad(startTime.getMinutes())}:${zeroPad(
+            startTime.getSeconds()
+          )}`;
           return `
             <span class="stage ${getColor(stage.status)}">
-              <span>${stage.name}</span>
+              <span>
+                <span class="status big">${formattedStartTime}</span>
+                ${stage.name}
+              </span>
               <span class="status">
                 ${formatStatus(stage.status)}
               </span>
@@ -58,22 +67,24 @@ const renderBlock = ({ job, name, runs }, baseUrl) => {
       const color = getColor(status);
       const isAborted = run.status === "ABORTED";
       const startTime = new Date(run.startTimeMillis);
-      const formattedStartTime = `${zeroPad(startTime.getHours())}:${zeroPad(
-        startTime.getMinutes()
-      )}`;
+      const formattedStartTime = `${zeroPad(startTime.getDate())}/${zeroPad(
+        startTime.getMonth() + 1
+      )} ${zeroPad(startTime.getHours())}:${zeroPad(startTime.getMinutes())}`;
       return `
       <li class="item ${color} ${isAborted ? "aborted" : ""}" >
         <a target="_blank" href="${baseUrl}/job/${job}/${
         run.id
       }/console" class="flow">
-          <span class="name" >${run.name}</span>
+          <span class="name" >
+            <span class="status big">${formattedStartTime}</span>
+            ${run.name}
+          </span>
           <span class="status">
             ${formatStatus(run.status)}
           </span>
         </a>
         <span class="time">
           ${millisToHoursMinutesAndSeconds(run.durationMillis)}
-          <span class="status big">${formattedStartTime}</span>
         </span>
         ${renderStages(run.status, run.stages)}
       </li>
@@ -189,5 +200,4 @@ document.addEventListener("click", (e) => {
     activateBlock(tabName);
   }
 });
-
 
