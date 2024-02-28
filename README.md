@@ -1,11 +1,11 @@
-# FE Jenkins Dashboard
+# Jenkins Dashboard
 
 ## Description
-Monitor all FE Apps in one place
+Monitor all Jenkins Apps in one place. It's highly customizable and provides a quick way to view and manage all Jenkins pipelines in one place.
 
 ## How to run
 
-> ***NOTE***: *Make sure you're logged into jenkins-qa, else it'll not work.*
+> ***NOTE***: *Make sure you're logged into jenkins, else it'll not work.*
 
 
 Install Dependencies
