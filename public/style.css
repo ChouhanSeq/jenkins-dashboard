@@ -191,11 +191,21 @@ button {
 }
 
 .empty {
-  min-height: 100px;
+  min-height: 200px;
   display: flex;
   align-items: center;
   justify-content: center;
   font-style: italic;
+}
+
+.empty img {
+  height: 100px;
+}
+
+@media (prefers-color-scheme: dark) {
+  .empty img {
+    filter: invert(1) hue-rotate(180deg) brightness(2) contrast(1);
+  }
 }
 
 .disclaimer {

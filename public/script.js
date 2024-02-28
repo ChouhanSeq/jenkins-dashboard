@@ -111,8 +111,8 @@ const renderBlock = ({ job, name, runs }, baseUrl) => {
         runs
           ? runs.length
             ? `<ul>${items}</ul>`
-            : '<div class="empty">No Recent Deployments</div>'
-          : '<div class="empty">Some other Error</div>'
+            : '<div class="empty"><img src="/empty.png" alt="" /></div>'
+          : '<div class="empty"><img src="/signal.png" alt="" /></div>'
       }
     </div>
   `;
