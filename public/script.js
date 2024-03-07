@@ -75,7 +75,7 @@ const renderBlock = ({ job, name, runs }, baseUrl) => {
         <a target="_blank" href="${baseUrl}/job/${job}/${
         run.id
       }/console" class="flow">
-          <span class="name" >
+          <span class="name" title="${run.name}">
             <span class="status big">${formattedStartTime}</span>
             ${run.name}
           </span>
