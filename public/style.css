@@ -101,6 +101,12 @@ a {
   grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
 }
 
+@media (min-width: 2000px) {
+  .blocks.active {
+    grid-template-columns: repeat(auto-fit, minmax(600px, 1fr));
+  }
+}
+
 .block {
   background: var(--block);
   padding: 8px 8px 0;
