@@ -12,7 +12,7 @@ const getJobStatus = (job, baseUrl) =>
     .then((res) => res.json())
     .then((data) =>
       data.filter(
-        (item) => !item.name.includes("-PR-") && item.name.includes("-")
+        (item) => !item.name.includes("-PR-")
       )
     );
 
