@@ -1,23 +1,29 @@
-# Jenkins Dashboard
+# Rsbuild Project
 
-## Description
-Monitor all Jenkins Apps in one place. It's highly customizable and provides a quick way to view and manage all Jenkins pipelines in one place.
+## Setup
 
-## How to run
+Install the dependencies:
 
-> ***NOTE***: *Make sure you're logged into jenkins, else it'll not work.*
-
-
-Install Dependencies
 ```bash
-yarn install
+pnpm install
 ```
 
-Run the app
+## Get Started
+
+Start the dev server:
+
 ```bash
-yarn start
+pnpm dev
 ```
 
-Open the Dashboard at
+Build the app for production:
 
-http://localhost:3001
+```bash
+pnpm build
+```
+
+Preview the production build locally:
+
+```bash
+pnpm preview
+```

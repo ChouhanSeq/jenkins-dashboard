@@ -1,20 +1,18 @@
 const express = require("express");
-const shrinkRay = require("shrink-ray-current");
+const cors = require("cors");
 const dashboards = require("./config");
+const compression = require('compression');
 
 const app = express();
 
-const finalPort =
-  process.env.PORT || process.env.NODE_ENV === "production" ? 3001 : 3002;
+const isProd = process.env.NODE_ENV === "production";
+
+const finalPort = process.env.PORT || isProd ? 3001 : 3003;
 
 const getJobStatus = (job, baseUrl) =>
   fetch(`${baseUrl}/job/${job}/wfapi/runs`)
     .then((res) => res.json())
-    .then((data) =>
-      data.filter(
-        (item) => !item.name.includes("-PR-")
-      )
-    );
+    .then((data) => data.filter((item) => !item.name.includes("-PR-")));
 
 let statusCache = [];
 
@@ -52,7 +50,9 @@ const getStatuses = async ({ name, jobs, baseUrl }) => {
 
 getDashboards();
 
-app.use(shrinkRay());
+if (!isProd) {
+  app.use(cors());
+}
 
 app.get("/status", async (_req, res) => {
   if (statusCache === "error") {
@@ -61,15 +61,21 @@ app.get("/status", async (_req, res) => {
   res.send(statusCache);
 });
 
-app.get("/", (_req, res) => {
-  res.sendFile(`${__dirname}/index.html`);
-});
+if (isProd) {
+  app.use(compression());
 
-app.use(express.static("public"));
+  app.get("/", (_req, res) => {
+    res.sendFile(`${__dirname}/dist/index.html`);
+  });
+
+  app.use(express.static("dist"));
+}
 
 app.listen(finalPort, () => {
   console.log(
     `\x1b[33m\nServer running on http://localhost:${finalPort}\n\x1b[0m`
   );
 });
+
+
 
