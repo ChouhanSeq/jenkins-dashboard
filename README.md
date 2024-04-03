@@ -1,29 +1,18 @@
-# Rsbuild Project
+# Jenkins Dashboard
 
-## Setup
-
-Install the dependencies:
-
+### Set it up
 ```bash
-pnpm install
+git clone git@github.com:pratyushseq/jenkins-dashboard.git
+cd jenkins-dashboard
+yarn install
+yarn start
 ```
 
-## Get Started
+Navigate to http://localhost:3001
 
-Start the dev server:
-
+### To update it
 ```bash
-pnpm dev
-```
-
-Build the app for production:
-
-```bash
-pnpm build
-```
-
-Preview the production build locally:
-
-```bash
-pnpm preview
+git pull origin master
+yarn install
+yarn restart
 ```
