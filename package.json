@@ -1,5 +1,5 @@
 {
-  "name": "jenkins-ultra",
+  "name": "jenkins",
   "private": true,
   "version": "1.0.0",
   "scripts": {
@@ -7,8 +7,9 @@
     "dev": "yarn server | rsbuild dev",
     "build": "rsbuild build",
     "start": "yarn build && NODE_ENV=production pm2 start server.js --name jenkins && pm2 save",
-    "stop": "pm2 delete jenkins",
-    "restart": "yarn stop && yarn start"
+    "stop": "pm2 delete jenkins && pm2 save",
+    "restart": "yarn stop && yarn start",
+    "logs": "pm2 logs"
   },
   "dependencies": {
     "@million/lint": "^0.0.73",

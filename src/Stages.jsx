@@ -6,9 +6,10 @@ export const Stages = ({ status, stages }) => {
   return (
     <div class="progress">
       {stages.map((stage) => (
-        <Stage stage={stage} />
+        <Stage key={stage.name} stage={stage} />
       ))}
     </div>
   );
 };
+
 

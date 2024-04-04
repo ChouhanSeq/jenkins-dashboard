@@ -7,7 +7,7 @@ export const Runs = ({ runs, job, baseUrl }) =>
     runs.length ? (
       <ul>
         {runs?.map((run) => (
-          <Run run={run} baseUrl={baseUrl} job={job} />
+          <Run key={run.name} run={run} baseUrl={baseUrl} job={job} />
         ))}
       </ul>
     ) : (
@@ -20,4 +20,5 @@ export const Runs = ({ runs, job, baseUrl }) =>
       <img src={signal} alt="" />
     </div>
   );
+
 
