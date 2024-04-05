@@ -5,7 +5,7 @@
 ### Run it
 Open a Terminal and run the following command:
 ```bash
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/pratyushseq/jenkins-dashboard/master/jenkins.sh)"
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/pratyushseq/jenkins-dashboard/master/run.sh)"
 ```
 
 ### Set it up on local
