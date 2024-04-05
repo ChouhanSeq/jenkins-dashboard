@@ -3,8 +3,10 @@
 ### NOTE: You need to be inside the VPN for this app to work.
 
 ### Run it
-Head to https://github.com/pratyushseq/jenkins-dashboard/releases and download the latest `jenkins.sh`. 
-Double click on the file to run it. It will set it up and open a browser window with the dashboard.
+Open a Terminal and run the following command:
+```bash
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/pratyushseq/jenkins-dashboard/master/jenkins.sh)"
+```
 
 ### Set it up on local
 ```bash
