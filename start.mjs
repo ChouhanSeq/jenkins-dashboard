@@ -2,12 +2,10 @@ import chalk from "chalk";
 
 try {
   await $`yarn stop`;
-  console.log(chalk.red.bold("\n🛑 Old Service Stopped"));
+  console.log(chalk.red.bold("\n🛑 Old Service Stopped\n"));
 } catch (_e) {
-  console.log(chalk.green.bold("\n✅ Nothing to Stop"));
+  console.log(chalk.green.bold("\n✅ Nothing to Stop\n"));
 }
-
-console.log("\n");
 
 await $`yarn build && yarn serve`;
 
