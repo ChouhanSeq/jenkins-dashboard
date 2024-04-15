@@ -26,7 +26,7 @@ module.exports = [
       },
       {
         name: "UWP",
-        job: "pp-po-s1-frontend",
+        job: "serviceos-s1service-frontend",
       },
       {
         name: "Eureka",
@@ -78,6 +78,7 @@ module.exports = [
     ],
   },
 ];
+
 
 
 
