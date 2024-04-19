@@ -9,6 +9,7 @@
   --red: red;
   --blue: #204fff;
   --grey: grey;
+  --alt-grey: #333;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -23,6 +24,7 @@
     --red: red;
     --blue: #2f86fb;
     --grey: grey;
+    --alt-grey: #aaa;
   }
 }
 
@@ -230,6 +232,9 @@ button {
   font-weight: normal;
   margin: 0;
   margin-bottom: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .tabs-wrapper {
@@ -267,4 +272,71 @@ button {
   height: 60px;
   margin-right: 32px;
   margin-left: 16px;
+}
+
+.version-trigger {
+  font-size: 12px;
+}
+
+.versions,
+.history {
+  font-size: 14px;
+  background: var(--block);
+  padding: 4px 8px;
+  border-radius: 4px;
+}
+
+.versions .version {
+  margin-bottom: 4px;
+  display: flex;
+  flex-wrap: wrap;
+  background: var(--block);
+  padding: 4px;
+  border-radius: 4px;
+}
+
+.versions .version label {
+  cursor: pointer;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.version-name {
+  flex: 1;
+  margin-left: 4px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.history {
+  flex: 1 0 100%;
+  margin-top: 4px;
+  padding-top: 8px;
+  display: flex;
+  flex-direction: column-reverse;
+}
+
+.history-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--block);
+  padding: 4px 8px;
+  border-radius: 4px;
+  margin-bottom: 4px;
+}
+
+.env,
+.latest-version {
+  background: var(--block);
+  padding: 0 4px;
+  border-radius: 4px;
+}
+
+.env,
+.history-date {
+  color: var(--alt-grey);
 }
