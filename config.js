@@ -86,7 +86,7 @@ module.exports = [
       },
       {
         name: "UWP",
-        job: "pp-po-s1-frontend",
+        job: "serviceos-s1service-frontend",
         env: "pp-po-uwp-frontend",
       },
       {
@@ -102,6 +102,7 @@ module.exports = [
     ],
   },
 ];
+
 
 
 
