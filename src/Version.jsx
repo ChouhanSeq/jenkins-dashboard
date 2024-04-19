@@ -13,7 +13,7 @@ export const Version = ({ env, versions, history }) => {
       </label>
       {expand ? (
         <div className="history">
-          {history[env]
+          {history[env]?.length
             ? history[env].map((item) => (
                 <div key={item.date} className="history-item">
                   <span className="history-date">{item.date}</span>
