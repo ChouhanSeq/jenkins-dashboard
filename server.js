@@ -18,9 +18,7 @@ const getEnvInfo = async () => {
   try {
     const res = await fetch(envInfo);
     envInfoCache = await res.json();
-    setTimeout(() => {
-      getEnvInfo();
-    }, 5000);
+    setTimeout(getEnvInfo, 5000);
   } catch (_err) {
     return "error";
   }

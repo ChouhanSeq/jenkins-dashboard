@@ -1,6 +1,6 @@
 import { Version } from "./Version";
 
-export const Versions = ({ versions, history }) => {
+export const Versions = ({ versions = {}, history = {} }) => {
   const envs = Object.keys(versions).filter((key) => versions[key] !== "?");
 
   if (!envs.length) {
