@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-import { Dashboard } from "./Dashboard";
+import { Envs } from "./Envs";
 
 import { isProd } from "./utils";
 import evil from "./public/evil.svg";
@@ -8,32 +8,32 @@ import evil from "./public/evil.svg";
 import "./App.css";
 
 const App = () => {
-  const [dashboards, setDashboards] = useState();
+  const [envs, setEnvs] = useState();
 
-  const fetchDashboards = () => {
+  const fetchData = () => {
     const url = isProd ? "/status" : "http://localhost:3003/status";
     fetch(url)
       .then((res) => res.json())
-      .then(setDashboards)
+      .then(setEnvs)
       .catch((_e) => null);
   };
 
   useEffect(() => {
-    fetchDashboards();
+    fetchData();
 
     const interval = setInterval(() => {
-      fetchDashboards();
+      fetchData();
     }, 1000);
 
     return () => clearInterval(interval);
   }, []);
 
-  if (dashboards) {
-    return <Dashboard dashboards={dashboards} />;
+  if (envs) {
+    return <Envs envs={envs} />;
   }
 
   return (
-    <div class="disclaimer red">
+    <div className="disclaimer red">
       <img src={evil} />
       <span>Logged OUT</span>
     </div>

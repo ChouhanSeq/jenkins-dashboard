@@ -4,7 +4,7 @@ import { Blocks } from "./Blocks";
 
 export const Dashboard = ({ dashboards }) => {
   const [activeTab, setActiveTab] = useState(
-    localStorage.tab || dashboards?.[0]?.name || ""
+    localStorage.tab || dashboards?.[0]?.id || ""
   );
 
   const setTab = (tab) => {
@@ -12,11 +12,13 @@ export const Dashboard = ({ dashboards }) => {
     localStorage.setItem("tab", tab);
   };
 
-  const blockToRender = dashboards.find(({ name }) => name === activeTab);
+  const tabs = dashboards.map(({ id, name }) => ({ id, name }));
+
+  const blockToRender = dashboards.find(({ id }) => id === activeTab);
 
   return (
     <>
-      <Tabs dashboards={dashboards} activeTab={activeTab} setTab={setTab} />
+      <Tabs tabs={tabs} activeTab={activeTab} setTab={setTab} />
       {dashboards?.length ? <Blocks {...blockToRender} /> : null}
     </>
   );

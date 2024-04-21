@@ -5,16 +5,16 @@ import { Versions } from "./Versions";
 export const Block = ({ name, job, runs, baseUrl, env, envHistory }) => {
   const [showVersions, setShowVersions] = useState(false);
   return (
-    <div class="block">
+    <div className="block">
       <h2>
         <a target="_blank" href={`${baseUrl}/job/${job}`}>
           {name}
         </a>
-        <a target="_blank" class="build" href={`${baseUrl}/job/${job}/build`}>
+        <a target="_blank" className="build" href={`${baseUrl}/job/${job}/build`}>
           <button>New Build</button>
         </a>
       </h2>
-      <p class="job-name">
+      <p className="job-name">
         <a target="_blank" href={`${baseUrl}/job/${job}`}>
           <b>Job :</b> {job}
         </a>

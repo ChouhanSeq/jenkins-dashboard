@@ -1,25 +1,27 @@
 import logo from "./public/logo.png";
 
-export const Tabs = ({ dashboards, activeTab, setTab }) => {
+export const Tabs = ({ tabs, activeTab, setTab, showLogo }) => {
   return (
-    <div class="tabs-wrapper">
-      <ul class="tabs">
-        {dashboards.map(({ name }) => (
+    <div className={`tabs-wrapper ${showLogo ? "with-logo" : ""}`}>
+      <ul className="tabs">
+        {tabs.map(({ id, name }) => (
           <li
-            key={name}
-            className={`tab ${activeTab === name ? "active" : ""}`}
-            onClick={() => setTab(name)}
+            key={id}
+            className={`tab ${activeTab === id ? "active" : ""}`}
+            onClick={() => setTab(id)}
           >
             {name}
           </li>
         ))}
       </ul>
-      <a
-        href="https://github.com/pratyushseq/jenkins-dashboard"
-        target="_blank"
-      >
-        <img src={logo} alt="Jenkins Ultra" />
-      </a>
+      {showLogo ? (
+        <a
+          href="https://github.com/pratyushseq/jenkins-dashboard"
+          target="_blank"
+        >
+          <img src={logo} alt="Jenkins Ultra" />
+        </a>
+      ) : null}
     </div>
   );
 };

@@ -1,6 +1,6 @@
 const express = require("express");
 const cors = require("cors");
-const dashboards = require("./config");
+const { dashboards, envs } = require("./config");
 const compression = require("compression");
 
 const app = express();
@@ -31,28 +31,42 @@ const getJobStatus = (job, baseUrl) =>
 
 let statusCache = [];
 
-const getDashboards = async () => {
+console.clear();
+
+const getEnvs = async () => {
   try {
-    const dashboardResponses = await Promise.allSettled(
-      dashboards.map(({ name, jobs, baseUrl }) =>
-        getStatuses({ name, jobs, baseUrl })
-      )
+    const envResponses = await Promise.allSettled(
+      envs.map(({ baseUrl }) => getDashboards(baseUrl))
     );
-    statusCache = dashboardResponses.map(({ value }) => value);
-    getDashboards();
+    statusCache = envResponses.map(({ value }, idx) => ({
+      id: envs[idx].id,
+      name: envs[idx].name,
+      dashboards: value,
+    }));
+    getEnvs();
   } catch (_err) {
-    statusCache = "error";
-    setTimeout(() => {
-      getDashboards();
-    }, 1000);
+    envsCache = "error";
+    setTimeout(getEnvs, 1000);
   }
 };
 
-const getStatuses = async ({ name, jobs, baseUrl }) => {
+const getDashboards = async (baseUrl) => {
+  try {
+    const dashboardResponses = await Promise.allSettled(
+      dashboards.map(({ id, name, jobs }) =>
+        getStatuses({ id, name, jobs, baseUrl })
+      )
+    );
+    return dashboardResponses.map(({ value }) => value);
+  } catch (_err) {}
+};
+
+const getStatuses = async ({ id, name, jobs, baseUrl }) => {
   const statuses = await Promise.allSettled(
     jobs.map(({ job }) => getJobStatus(job, baseUrl))
   );
   return {
+    id,
     name,
     baseUrl,
     jobs: jobs.map(({ name, job, env }, index) => ({
@@ -65,7 +79,7 @@ const getStatuses = async ({ name, jobs, baseUrl }) => {
   };
 };
 
-getDashboards();
+getEnvs();
 getEnvInfo();
 
 if (!isProd) {
