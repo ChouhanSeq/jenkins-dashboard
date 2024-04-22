@@ -55,7 +55,6 @@ body {
   font-size: 16px;
   background: var(--background);
   color: var(--color);
-  min-width: 450px;
 }
 
 h1 {
@@ -86,7 +85,7 @@ a {
 }
 
 .name {
-  max-width: 75%;
+  max-width: 70%;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -102,6 +101,12 @@ a {
 @media (min-width: 2000px) {
   .blocks {
     grid-template-columns: repeat(auto-fit, minmax(600px, 1fr));
+  }
+}
+
+@media (max-width: 768px) {
+  .blocks {
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   }
 }
 
