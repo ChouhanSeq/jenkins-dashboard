@@ -31,8 +31,6 @@ const getJobStatus = (job, baseUrl) =>
 
 let statusCache = [];
 
-console.clear();
-
 const getEnvs = async () => {
   try {
     const envResponses = await Promise.allSettled(
@@ -43,7 +41,7 @@ const getEnvs = async () => {
       name: envs[idx].name,
       dashboards: value,
     }));
-    getEnvs();
+    setTimeout(getEnvs, 1000);
   } catch (_err) {
     envsCache = "error";
     setTimeout(getEnvs, 1000);

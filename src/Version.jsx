@@ -8,7 +8,9 @@ export const Version = ({ env, versions, history }) => {
         <span>{expand ? "-" : "+"}</span>
         <span className="version-name">
           <span className="env">{env}</span>
-          <span className="latest-version">{versions[env]}</span>
+          <span className="latest-version" title={versions[env]}>
+            {versions[env]}
+          </span>
         </span>
       </label>
       {expand ? (
@@ -17,7 +19,9 @@ export const Version = ({ env, versions, history }) => {
             ? history[env].map((item) => (
                 <div key={item.date} className="history-item">
                   <span className="history-date">{item.date}</span>
-                  <span>{item.version}</span>
+                  <span className="latest-version" title={item.version}>
+                    {item.version}
+                  </span>
                 </div>
               ))
             : null}

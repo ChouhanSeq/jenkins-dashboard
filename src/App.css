@@ -346,6 +346,15 @@ button {
   background: var(--block);
   padding: 0 4px;
   border-radius: 4px;
+  display: block;
+}
+
+.latest-version {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-left: 16px;
+  cursor: context-menu;
 }
 
 .env,
@@ -355,4 +364,7 @@ button {
 
 .history-date {
   font-size: 13px;
+  white-space: nowrap;
+  display: block;
+  flex: 0 0 auto;
 }
