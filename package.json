@@ -4,7 +4,7 @@
   "version": "1.0.0",
   "scripts": {
     "server": "nodemon server.js --quiet",
-    "dev": "rsbuild dev",
+    "dev": "yarn server | rsbuild dev",
     "build": "rsbuild build",
     "serve": "NODE_ENV=production pm2 start server.js --name jenkins && pm2 save",
     "start": "zx start.mjs",

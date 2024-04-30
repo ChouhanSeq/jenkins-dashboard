@@ -9,16 +9,13 @@ const isProd = process.env.NODE_ENV === "production";
 
 const finalPort = process.env.PORT || isProd ? 3001 : 3003;
 
-const envInfo =
+const envInfoUrl =
   "https://jenkins-qa.sequoia-development.com/userContent/environment-info.json";
-
-let envInfoCache = {};
 
 const getEnvInfo = async () => {
   try {
-    const res = await fetch(envInfo);
-    envInfoCache = await res.json();
-    setTimeout(getEnvInfo, 5000);
+    const res = await fetch(envInfoUrl);
+    return await res.json();
   } catch (_err) {
     return "error";
   }
@@ -33,8 +30,9 @@ let statusCache = [];
 
 const getEnvs = async () => {
   try {
+    const envInfo = await getEnvInfo();
     const envResponses = await Promise.allSettled(
-      envs.map(({ baseUrl }) => getDashboards(baseUrl))
+      envs.map(({ baseUrl }) => getDashboards(baseUrl, envInfo))
     );
     statusCache = envResponses.map(({ value }, idx) => ({
       id: envs[idx].id,
@@ -48,18 +46,18 @@ const getEnvs = async () => {
   }
 };
 
-const getDashboards = async (baseUrl) => {
+const getDashboards = async (baseUrl, envInfo) => {
   try {
     const dashboardResponses = await Promise.allSettled(
       dashboards.map(({ id, name, jobs }) =>
-        getStatuses({ id, name, jobs, baseUrl })
+        getStatuses({ id, name, jobs, baseUrl, envInfo })
       )
     );
     return dashboardResponses.map(({ value }) => value);
   } catch (_err) {}
 };
 
-const getStatuses = async ({ id, name, jobs, baseUrl }) => {
+const getStatuses = async ({ id, name, jobs, baseUrl, envInfo }) => {
   const statuses = await Promise.allSettled(
     jobs.map(({ job }) => getJobStatus(job, baseUrl))
   );
@@ -71,14 +69,13 @@ const getStatuses = async ({ id, name, jobs, baseUrl }) => {
       job,
       name: name,
       runs: statuses[index].value,
-      env: envInfoCache?.versions?.[env],
-      envHistory: envInfoCache?.version_history?.[env],
+      env: envInfo?.versions?.[env],
+      envHistory: envInfo?.version_history?.[env],
     })),
   };
 };
 
 getEnvs();
-getEnvInfo();
 
 if (!isProd) {
   app.use(cors());
@@ -110,4 +107,8 @@ app.listen(finalPort, () => {
     `\x1b[33m\nServer running on http://localhost:${finalPort}\n\x1b[0m`
   );
 });
+
+
+
+
 

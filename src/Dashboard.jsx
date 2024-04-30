@@ -12,7 +12,7 @@ export const Dashboard = ({ dashboards }) => {
     localStorage.setItem("tab", tab);
   };
 
-  const tabs = dashboards.map(({ id, name }) => ({ id, name }));
+  const tabs = dashboards?.map(({ id, name }) => ({ id, name }));
 
   const blockToRender = dashboards.find(({ id }) => id === activeTab);
 
