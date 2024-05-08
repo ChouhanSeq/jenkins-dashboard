@@ -33,7 +33,7 @@ const dashboards = [
       },
       {
         name: "TR",
-        job: "pp-ptr-totalrewards-frontend",
+        job: "compos-apps-totalrewards-frontend",
         env: "pp-totalrewards-frontend",
       },
       {
@@ -66,5 +66,6 @@ const dashboards = [
 ];
 
 module.exports = { dashboards, envs };
+
 
 
