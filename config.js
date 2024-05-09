@@ -28,7 +28,7 @@ const dashboards = [
       },
       {
         name: "PX",
-        job: "pp-sp-benefits-px-frontend",
+        job: "benefitos-benefits-frontend",
         env: "pp-benefits-px-frontend-v2",
       },
       {
@@ -38,7 +38,7 @@ const dashboards = [
       },
       {
         name: "Wellbeing",
-        job: "pp-sp-wellbeing-frontend",
+        job: "benefitos-wellbeing-frontend",
         env: "pp-sp-wellbeing-frontend",
       },
       {
@@ -66,6 +66,8 @@ const dashboards = [
 ];
 
 module.exports = { dashboards, envs };
+
+
 
 
 
