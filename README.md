@@ -22,7 +22,7 @@ Navigate to http://localhost:3001
 ```bash
 git pull origin master
 yarn install
-yarn restart
+yarn start
 ```
 
 ### To Customize the Dashboard
