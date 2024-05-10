@@ -26,11 +26,13 @@ export const Run = ({ run, baseUrl, job }) => {
           <span className="status big">{formattedStartTime}</span>
           {run.name}
         </span>
-        <span className="status">{formatStatus(run.status)}</span>
       </a>
-      <span className="time">
-        {millisToHoursMinutesAndSeconds(run.durationMillis)}
-      </span>
+      <div>
+        <span className="status">{formatStatus(run.status)}</span>
+        <span className="time">
+          {millisToHoursMinutesAndSeconds(run.durationMillis)}
+        </span>
+      </div>
       <Stages stages={run.stages} status={run.status} />
     </li>
   );

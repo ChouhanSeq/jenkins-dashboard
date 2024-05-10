@@ -139,6 +139,10 @@ li {
   padding: 6px 8px;
 }
 
+li:hover{
+  box-shadow: 0px 0px 7px 2px #bdbdbd;
+}
+
 .stage {
   display: block;
   background-color: var(--stage-item);
@@ -161,7 +165,9 @@ li {
   float: right;
   font-size: 14px;
   display: flex;
-  align-items: center;
+  padding-left: 8px;
+  align-items: right;
+  width: 62px;
 }
 
 .progress {
@@ -288,6 +294,10 @@ button {
 
 .version-trigger {
   font-size: 12px;
+}
+
+.versions {
+  border: 1px dashed #000000;
 }
 
 .versions,
