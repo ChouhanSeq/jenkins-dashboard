@@ -76,6 +76,7 @@ a {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
+  border-radius: 2px;
 }
 
 .flow {
@@ -139,16 +140,21 @@ li {
   padding: 6px 8px;
 }
 
-li:hover{
+li:hover {
   box-shadow: 0px 0px 10px 2px #00000099;
 }
 
 .stage {
-  display: block;
+  display: flex;
+  align-items: center;
   background-color: var(--stage-item);
   padding: 4px 8px;
   margin: 2px;
   font-size: 16px;
+}
+
+.stage-name {
+  flex: 1;
 }
 
 .stage:first-child {
@@ -176,6 +182,7 @@ li:hover{
 }
 
 .status {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   font-size: 60%;
   background-color: var(--background);
   padding: 2px 4px;

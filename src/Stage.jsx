@@ -8,7 +8,7 @@ export const Stage = ({ stage }) => {
 
   return (
     <span className={`stage ${getColor(stage.status)}`}>
-      <span>
+      <span className="stage-name">
         <span className="status big">{formattedStartTime}</span>
         {stage.name}
       </span>
