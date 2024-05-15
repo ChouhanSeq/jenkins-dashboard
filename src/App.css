@@ -170,10 +170,9 @@ li:hover {
 .time {
   float: right;
   font-size: 14px;
-  display: flex;
-  padding-left: 8px;
-  align-items: right;
-  width: 62px;
+  margin-left: 8px;
+  width: 54px;
+  text-align: right;
 }
 
 .progress {
