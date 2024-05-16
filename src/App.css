@@ -10,6 +10,7 @@
   --blue: #204fff;
   --grey: grey;
   --alt-grey: #333;
+  --shadow: #0000001a;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -25,6 +26,7 @@
     --blue: #2f86fb;
     --grey: grey;
     --alt-grey: #aaa;
+    --shadow: #00000099;
   }
 }
 
@@ -138,10 +140,12 @@ li {
   margin-bottom: 12px;
   background-color: var(--line-item);
   padding: 6px 8px;
+  transition: box-shadow 200ms;
 }
 
 li:hover {
-  box-shadow: 0px 0px 10px 2px #00000099;
+  box-shadow: 2px 4px 10px 2px var(--shadow);
+  transition: box-shadow 200ms;
 }
 
 .stage {
