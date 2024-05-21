@@ -212,7 +212,7 @@ button {
 }
 
 .aborted {
-  text-decoration: line-through;
+  position: relative;
 }
 
 .empty {
