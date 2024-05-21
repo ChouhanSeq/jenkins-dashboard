@@ -22,5 +22,11 @@ export const millisToHoursMinutesAndSeconds = (millis) => {
 
 export const zeroPad = (num) => (num < 10 ? `0${num}` : num);
 
-export const formatStatus = (status) => status.replace(/_/g, " ");
+export const formatStatus = (status) =>
+  status
+    .replace("IN_PROGRESS", "RUNNING")
+    .replace("NOT_EXECUTED", "SKIPPED")
+    .replace(/_/g, " ");
+
+
 
