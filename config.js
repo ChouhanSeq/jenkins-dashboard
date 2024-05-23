@@ -43,7 +43,7 @@ const dashboards = [
       },
       {
         name: "Kernel",
-        job: "pp-kernel-frontend",
+        job: "kernel-all-frontend",
         env: "org-settings",
       },
       {
@@ -66,4 +66,5 @@ const dashboards = [
 ];
 
 module.exports = { dashboards, envs };
+
 
