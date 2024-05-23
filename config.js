@@ -18,8 +18,8 @@ const dashboards = [
     jobs: [
       {
         name: "Adminshell",
-        job: "pp-kernel-adminshell-frontend",
-        env: "platform-frontend",
+        job: "kernel-adminshell-frontend",
+        env: "kernel-adminshell-frontend",
       },
       {
         name: "HRX",
@@ -43,7 +43,7 @@ const dashboards = [
       },
       {
         name: "Kernel",
-        job: "pp-kernel-frontend",
+        job: "kernel-all-frontend",
         env: "org-settings",
       },
       {
@@ -53,12 +53,12 @@ const dashboards = [
       },
       {
         name: "Eureka",
-        job: "pp-kernel-eureka-frontend",
-        env: "pp-kernel-eureka-frontend",
+        job: "kernel-eureka-frontend",
+        env: "kernel-eureka-frontend",
       },
       {
         name: "IDM",
-        job: "pp-kernel-idm-frontend",
+        job: "kernel-idm-frontend",
         env: "kernel_frontend",
       },
     ],
