@@ -122,11 +122,6 @@ const dashboards = [
         job: "kernel-billing-backend",
         env: "pp-kernel-killbill-backend",
       },
-      {
-        name: "Billing backend",
-        job: "kernel-billing-backend",
-        env: "pp-kernel-billing-backend",
-      },
     ],
   },
 ];
