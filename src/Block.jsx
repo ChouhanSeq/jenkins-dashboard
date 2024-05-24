@@ -1,16 +1,29 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Runs } from "./Runs";
 import { Versions } from "./Versions";
 
 export const Block = ({ name, job, runs, baseUrl, env, envHistory }) => {
-  const [showVersions, setShowVersions] = useState(false);
+  const [showVersions, setShowVersions] = useState(window.versions);
+
+  useEffect(() => {
+    const handler = () => {
+      setShowVersions(window.versions);
+    };
+    document.addEventListener("versions", handler);
+    return () => document.removeEventListener("versions", handler);
+  }, []);
+
   return (
     <div className="block">
       <h2>
         <a target="_blank" href={`${baseUrl}/job/${job}`}>
           {name}
         </a>
-        <a target="_blank" className="build" href={`${baseUrl}/job/${job}/build`}>
+        <a
+          target="_blank"
+          className="build"
+          href={`${baseUrl}/job/${job}/build`}
+        >
           <button>New Build</button>
         </a>
       </h2>
@@ -30,4 +43,5 @@ export const Block = ({ name, job, runs, baseUrl, env, envHistory }) => {
     </div>
   );
 };
+
 
