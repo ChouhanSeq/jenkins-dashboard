@@ -2,7 +2,15 @@ import logo from "./public/logo.png";
 
 window.versions = false;
 
-export const Tabs = ({ tabs, activeTab, setTab, showLogo }) => {
+export const Tabs = ({
+  tabs,
+  activeTab,
+  setTab,
+  showLogo,
+  parentTabs,
+  setParentTab,
+  activeParentTab,
+}) => {
   const handleVersionsClick = () => {
     // fire a custom event to trigger the versions tab
     window.versions = !window.versions;
@@ -11,15 +19,26 @@ export const Tabs = ({ tabs, activeTab, setTab, showLogo }) => {
   };
 
   return (
-    <div className={`tabs-wrapper ${showLogo ? "with-logo" : ""}`}>
+    <div className="tabs-wrapper">
       <ul className="tabs">
-        {tabs.map(({ id, name }) => (
+        {parentTabs.map(({ id, name }) => (
           <li
             key={id}
-            className={`tab ${activeTab === id ? "active" : ""}`}
-            onClick={() => setTab(id)}
+            className={`tab ${activeParentTab === id ? "active" : ""}`}
+            onClick={() => setParentTab(id)}
           >
             {name}
+            <ul className="tabs child-tabs">
+              {tabs.map(({ id, name }) => (
+                <li
+                  key={id}
+                  className={`tab ${activeTab === id ? "active" : ""}`}
+                  onClick={() => setTab(id)}
+                >
+                  {name}
+                </li>
+              ))}
+            </ul>
           </li>
         ))}
       </ul>

@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { Dashboard } from "./Dashboard";
-import { Tabs } from "./Tabs";
 
 export const Envs = ({ envs }) => {
   const [activeTab, setActiveTab] = useState(
@@ -18,9 +17,13 @@ export const Envs = ({ envs }) => {
 
   return (
     <>
-      <Tabs tabs={tabs} activeTab={activeTab} setTab={setTab} showLogo />
       {envs?.length ? (
-        <Dashboard dashboards={blockToRender.dashboards} />
+        <Dashboard
+          dashboards={blockToRender.dashboards}
+          parentTabs={tabs}
+          setParentTab={setTab}
+          activeParentTab={activeTab}
+        />
       ) : null}
     </>
   );

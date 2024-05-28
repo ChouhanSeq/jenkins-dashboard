@@ -155,7 +155,6 @@ li:hover {
 .stage {
   display: flex;
   align-items: center;
-  background-color: var(--stage-item);
   padding: 4px 8px;
   margin: 2px;
   font-size: 16px;
@@ -267,15 +266,10 @@ button {
   font-size: 14px;
 }
 
-.tabs-wrapper.with-logo {
-  margin-bottom: 0;
-}
-
 .tabs {
   display: flex;
   align-items: center;
   flex: 1;
-  padding-left: 16px;
   margin: 0;
 }
 
@@ -283,18 +277,50 @@ button {
   padding: 8px 16px;
   border: 1px solid var(--border);
   background: var(--background);
-  border-radius: 20px;
+  border-radius: 4px;
   margin-right: 8px;
   margin-bottom: 0;
   min-width: 100px;
   cursor: pointer;
   text-align: center;
   opacity: 0.8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 52px;
+  font-weight: bold;
 }
 
-.tab.active {
-  background: var(--line-item);
+.tab .tabs {
+  margin-left: 32px;
+  display: none;
+}
+
+.tabs:not(.child-tabs) > .tab.active {
   opacity: 1;
+  padding-right: 0;
+}
+
+.tab.active .tabs {
+  display: flex;
+}
+
+.tab .tab {
+  height: 50px;
+}
+
+.child-tabs {
+  border-radius: 4px;
+}
+
+.child-tabs .tab {
+  margin-right: 0;
+  border: none;
+  font-weight: normal;
+}
+
+.child-tabs .tab.active {
+  background-color: var(--line-item);
 }
 
 .tabs-wrapper img {
@@ -402,7 +428,7 @@ button {
 
 .blue {
   color: var(--blue);
-  background-color: #2050ff17;
+  background-color: #2050ff0e;
 }
 
 footer {

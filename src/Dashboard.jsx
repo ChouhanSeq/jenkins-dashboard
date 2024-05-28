@@ -2,7 +2,12 @@ import { useState } from "react";
 import { Tabs } from "./Tabs";
 import { Blocks } from "./Blocks";
 
-export const Dashboard = ({ dashboards }) => {
+export const Dashboard = ({
+  dashboards,
+  parentTabs,
+  setParentTab,
+  activeParentTab,
+}) => {
   const [activeTab, setActiveTab] = useState(
     localStorage.tab || dashboards?.[0]?.id || ""
   );
@@ -17,10 +22,24 @@ export const Dashboard = ({ dashboards }) => {
   const blockToRender = dashboards.find(({ id }) => id === activeTab);
 
   return (
-    <>
-      <Tabs tabs={tabs} activeTab={activeTab} setTab={setTab} />
+    <div className="dashboard">
+      <Tabs
+        tabs={tabs}
+        activeTab={activeTab}
+        setTab={setTab}
+        parentTabs={parentTabs}
+        setParentTab={setParentTab}
+        activeParentTab={activeParentTab}
+        showLogo
+      />
       {dashboards?.length ? <Blocks {...blockToRender} /> : null}
-    </>
+    </div>
   );
 };
+
+
+
+
+
+
 
