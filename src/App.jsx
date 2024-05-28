@@ -37,7 +37,7 @@ const App = () => {
         <footer>
           {statuses.map((status) => (
             <span key={status.label}>
-              {status.emoji} {status.label}
+              <i>{status.emoji}</i> {status.label}
             </span>
           ))}
         </footer>
@@ -54,4 +54,5 @@ const App = () => {
 };
 
 export default App;
+
 

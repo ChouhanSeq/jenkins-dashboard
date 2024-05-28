@@ -421,3 +421,8 @@ footer span {
   padding: 4px 8px;
   border-radius: 4px;
 }
+
+footer span i {
+  margin-right: 4px;
+  font-style: normal;
+}
