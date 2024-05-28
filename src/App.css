@@ -59,6 +59,11 @@ body {
   flex: 1;
 }
 
+button:hover {
+  box-shadow: 2px 4px 10px 2px var(--shadow);
+  transition: box-shadow 200ms;
+}
+
 .blocks-wrapper {
   flex: 1;
 }
@@ -290,6 +295,7 @@ button {
   justify-content: center;
   height: 52px;
   font-weight: bold;
+  font-size: 16px;
 }
 
 .tab .tabs {
@@ -300,6 +306,7 @@ button {
 .tabs:not(.child-tabs)>.tab.active {
   opacity: 1;
   padding-right: 0;
+  background-color: #0000000a;
 }
 
 .tab.active .tabs {
@@ -318,10 +325,12 @@ button {
   margin-right: 0;
   border: none;
   font-weight: normal;
+  font-size: 14px;
 }
 
 .child-tabs .tab.active {
-  background-color: var(--line-item);
+  background-color: #aaaaaa69;
+  font-weight: bold;
 }
 
 .tabs-wrapper img {
@@ -452,4 +461,10 @@ footer span {
 footer span i {
   margin-right: 4px;
   font-style: normal;
+}
+
+.full-height-button {
+  height: 52px;
+  font-size: 14px;
+  padding: 0 16px;
 }

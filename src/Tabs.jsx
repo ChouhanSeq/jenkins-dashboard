@@ -43,7 +43,9 @@ export const Tabs = ({
         ))}
       </ul>
       {showLogo ? (
-        <button onClick={handleVersionsClick}>Toggle all versions</button>
+        <button onClick={handleVersionsClick} className="full-height-button">
+          Toggle all versions
+        </button>
       ) : null}
       {showLogo ? (
         <a
