@@ -1,6 +1,6 @@
 :root {
   --color: "#000";
-  --background: #fff;
+  --background: #ffffff;
   --block: #00000009;
   --line-item: #0000000f;
   --stage-item: #00000011;
@@ -35,18 +35,6 @@
   min-width: 0;
 }
 
-.green {
-  color: var(--green);
-}
-
-.red {
-  color: var(--red);
-}
-
-.blue {
-  color: var(--blue);
-}
-
 .grey {
   color: var(--grey);
 }
@@ -57,6 +45,22 @@ body {
   font-size: 16px;
   background: var(--background);
   color: var(--color);
+  min-height: calc(100vh - 32px);
+  margin: 0;
+  padding: 4px;
+  display: flex;
+  flex-direction: column;
+  flex: 1
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.blocks-wrapper {
+  flex: 1;
 }
 
 h1 {
@@ -175,7 +179,7 @@ li:hover {
   float: right;
   font-size: 14px;
   margin-left: 8px;
-  width: 54px;
+  width: 75px;
   text-align: right;
 }
 
@@ -186,14 +190,9 @@ li:hover {
 
 .status {
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-  font-size: 60%;
-  background-color: var(--background);
-  padding: 2px 4px;
-  vertical-align: middle;
-  border-radius: 2px;
-  line-height: 1;
-  opacity: 0.7;
-  margin-left: 4px;
+  font-size: 80%;
+  margin-right: 8px;
+  cursor: help;
 }
 
 .status.big {
@@ -230,7 +229,7 @@ button {
 
 @media (prefers-color-scheme: dark) {
   .empty img {
-  filter: invert(1)brightness(0.6);
+    filter: invert(1)brightness(0.6);
   }
 }
 
@@ -389,4 +388,36 @@ button {
   white-space: nowrap;
   display: block;
   flex: 0 0 auto;
+}
+
+.green {
+  color: var(--green);
+  background-color: #00800020;
+}
+
+.red {
+  color: var(--red);
+  background-color: #ff000014;
+}
+
+.blue {
+  color: var(--blue);
+  background-color: #2050ff17;
+}
+
+footer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  margin: 32px 0 16px;
+}
+
+footer span {
+  font-size: 12px;
+  color: var(--alt-grey);
+  background-color: var(--line-item);
+  padding: 4px 8px;
+  border-radius: 4px;
 }

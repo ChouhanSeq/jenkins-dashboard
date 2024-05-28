@@ -14,6 +14,7 @@ export const Run = ({ run, baseUrl, job }) => {
   const formattedStartTime = `${zeroPad(startTime.getDate())}/${zeroPad(
     startTime.getMonth() + 1
   )} ${zeroPad(startTime.getHours())}:${zeroPad(startTime.getMinutes())}`;
+  const { value, title } = formatStatus(run.status);
 
   return (
     <li className={`item ${color} ${isAborted ? "aborted" : ""}`}>
@@ -23,12 +24,14 @@ export const Run = ({ run, baseUrl, job }) => {
         className="flow"
       >
         <span className="name" title={run.name}>
+          <span className="status" title={title}>
+            {value}
+          </span>
           <span className="status big">{formattedStartTime}</span>
           {run.name}
         </span>
       </a>
       <div>
-        <span className="status">{formatStatus(run.status)}</span>
         <span className="time">
           {millisToHoursMinutesAndSeconds(run.durationMillis)}
         </span>
@@ -37,4 +40,5 @@ export const Run = ({ run, baseUrl, job }) => {
     </li>
   );
 };
+
 

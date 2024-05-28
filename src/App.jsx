@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 
 import { Envs } from "./Envs";
 
-import { isProd } from "./utils";
+import { isProd, statuses } from "./utils";
 import evil from "./public/evil.svg";
 
 import "./App.css";
@@ -29,7 +29,20 @@ const App = () => {
   }, []);
 
   if (envs) {
-    return <Envs envs={envs} />;
+    return (
+      <>
+        <div className="blocks-wrapper">
+          <Envs envs={envs} />
+        </div>
+        <footer>
+          {statuses.map((status) => (
+            <span key={status.label}>
+              {status.emoji} {status.label}
+            </span>
+          ))}
+        </footer>
+      </>
+    );
   }
 
   return (

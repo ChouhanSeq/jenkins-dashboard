@@ -22,11 +22,21 @@ export const millisToHoursMinutesAndSeconds = (millis) => {
 
 export const zeroPad = (num) => (num < 10 ? `0${num}` : num);
 
-export const formatStatus = (status) =>
-  status
-    .replace("IN_PROGRESS", "RUNNING")
-    .replace("NOT_EXECUTED", "SKIPPED")
-    .replace(/_/g, " ");
+export const statusMap = {
+  SUCCESS: "✅",
+  FAILED: "🛑",
+  IN_PROGRESS: "🕒",
+  ABORTED: "🔪",
+  NOT_EXECUTED: "💤",
+};
 
+export const formatStatus = (status) => ({
+  value: statusMap[status] || "❓",
+  title: status?.replace(/_/g, " "),
+});
 
+export const statuses = Object.entries(statusMap).map(([key, value]) => ({
+  emoji: value,
+  label: key.replace(/_/g, " "),
+}));
 
