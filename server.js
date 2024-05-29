@@ -22,9 +22,8 @@ const getEnvInfo = async () => {
 };
 
 const getJobStatus = (job, baseUrl) =>
-  fetch(`${baseUrl}/job/${job}/wfapi/runs`)
-    .then((res) => res.json())
-    // .then((data) => data.filter((item) => !item.name.includes("-PR-")));
+  fetch(`${baseUrl}/job/${job}/wfapi/runs`).then((res) => res.json());
+// .then((data) => data.filter((item) => !item.name.includes("-PR-")));
 
 let statusCache = [];
 
@@ -81,6 +80,11 @@ if (!isProd) {
   app.use(cors());
 }
 
+const revision = require("child_process")
+  .execSync("git rev-parse HEAD")
+  .toString()
+  .trim();
+
 app.get("/status", async (_req, res) => {
   if (statusCache === "error") {
     return res.status(400).send("Error");
@@ -90,6 +94,14 @@ app.get("/status", async (_req, res) => {
 
 app.get("/env", async (_req, res) => {
   return res.send(envInfoCache);
+});
+
+app.get("/commit", async (_req, res) => {
+  return res.send(revision);
+});
+
+app.get("/token", async (_req, res) => {
+  return res.send(process.env.GITHUB_TOKEN);
 });
 
 if (isProd) {
@@ -107,8 +119,4 @@ app.listen(finalPort, () => {
     `\x1b[33m\nServer running on http://localhost:${finalPort}\n\x1b[0m`
   );
 });
-
-
-
-
 

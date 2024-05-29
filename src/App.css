@@ -473,3 +473,16 @@ footer span i {
 .space-right {
   margin-right: 8px;
 }
+
+.update {
+  height: 52px;
+  border-radius: 4px;
+  border: 1px solid orange;
+  background-color: rgba(255, 166, 0, 0.1);
+  color: orange;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 16px;
+  gap: 8px;
+}
