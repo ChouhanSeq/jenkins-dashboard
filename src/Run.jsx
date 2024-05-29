@@ -15,6 +15,7 @@ export const Run = ({ run, baseUrl, job }) => {
     startTime.getMonth() + 1
   )} ${zeroPad(startTime.getHours())}:${zeroPad(startTime.getMinutes())}`;
   const { value, title } = formatStatus(run.status);
+  const isPr = run.name.includes("-PR-");
 
   return (
     <li className={`item ${color} ${isAborted ? "aborted" : ""}`}>
@@ -28,6 +29,7 @@ export const Run = ({ run, baseUrl, job }) => {
             {value}
           </span>
           <span className="status big">{formattedStartTime}</span>
+          {isPr ? <span className="status big">PR</span> : null}
           {run.name}
         </span>
       </a>
@@ -40,5 +42,4 @@ export const Run = ({ run, baseUrl, job }) => {
     </li>
   );
 };
-
 

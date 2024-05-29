@@ -204,6 +204,7 @@ li:hover {
   margin-right: 8px;
   background: var(--stage-item);
   padding: 2px 4px;
+  border-radius: 4px;
 }
 
 button {

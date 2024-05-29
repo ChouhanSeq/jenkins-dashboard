@@ -24,7 +24,7 @@ const getEnvInfo = async () => {
 const getJobStatus = (job, baseUrl) =>
   fetch(`${baseUrl}/job/${job}/wfapi/runs`)
     .then((res) => res.json())
-    .then((data) => data.filter((item) => !item.name.includes("-PR-")));
+    // .then((data) => data.filter((item) => !item.name.includes("-PR-")));
 
 let statusCache = [];
 
