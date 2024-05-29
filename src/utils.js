@@ -75,7 +75,6 @@ export const useCheckUpdate = () => {
     fetchLatest();
   }, []);
 
-  return latest === current;
+  return latest && current ? latest === current : false;
 };
-
 
