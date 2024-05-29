@@ -1,6 +1,8 @@
+import { useEffect, useState } from "react";
 import logo from "./public/logo.png";
 
-window.versions = false;
+window.versions = JSON.parse(localStorage.showVersions || "false");
+window.pr = JSON.parse(localStorage.showPRs || "false");
 
 export const Tabs = ({
   tabs,
@@ -11,12 +13,29 @@ export const Tabs = ({
   setParentTab,
   activeParentTab,
 }) => {
+  const [showVersions, setShowVersions] = useState(window.versions);
+  const [showPRs, setShowPRs] = useState(window.pr);
+
   const handleVersionsClick = () => {
-    // fire a custom event to trigger the versions tab
     window.versions = !window.versions;
+    setShowVersions(!showVersions);
+    // fire a custom event to trigger the versions tab
     const event = new CustomEvent("versions");
     document.dispatchEvent(event);
   };
+
+  const handlePRsClick = () => {
+    window.pr = !window.pr;
+    setShowPRs(!showPRs);
+    // fire a custom event to toggle the PRs
+    const event = new CustomEvent("pr");
+    document.dispatchEvent(event);
+  };
+
+  useEffect(() => {
+    localStorage.setItem("showVersions", showVersions);
+    localStorage.setItem("showPRs", showPRs);
+  }, [showVersions, showPRs]);
 
   return (
     <div className="tabs-wrapper">
@@ -43,9 +62,17 @@ export const Tabs = ({
         ))}
       </ul>
       {showLogo ? (
-        <button onClick={handleVersionsClick} className="full-height-button">
-          Toggle all versions
-        </button>
+        <>
+          <button
+            onClick={handleVersionsClick}
+            className="full-height-button space-right"
+          >
+            {showVersions ? "Hide" : "Show"} versions
+          </button>
+          <button onClick={handlePRsClick} className="full-height-button">
+            {showPRs ? "Hide" : "Show"} PRs
+          </button>
+        </>
       ) : null}
       {showLogo ? (
         <a

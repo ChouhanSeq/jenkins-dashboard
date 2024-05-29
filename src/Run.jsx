@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { Stages } from "./Stages";
 import {
   formatStatus,
@@ -7,6 +8,7 @@ import {
 } from "./utils";
 
 export const Run = ({ run, baseUrl, job }) => {
+  const [showPRs, setShowPRs] = useState(window.pr);
   const status = run.status;
   const color = getColor(status);
   const isAborted = run.status === "ABORTED";
@@ -16,6 +18,18 @@ export const Run = ({ run, baseUrl, job }) => {
   )} ${zeroPad(startTime.getHours())}:${zeroPad(startTime.getMinutes())}`;
   const { value, title } = formatStatus(run.status);
   const isPr = run.name.includes("-PR-");
+
+  useEffect(() => {
+    const handler = () => {
+      setShowPRs(window.pr);
+    };
+    document.addEventListener("pr", handler);
+    return () => document.removeEventListener("pr", handler);
+  }, []);
+
+  if (!showPRs && isPr) {
+    return null;
+  }
 
   return (
     <li className={`item ${color} ${isAborted ? "aborted" : ""}`}>
@@ -42,4 +56,5 @@ export const Run = ({ run, baseUrl, job }) => {
     </li>
   );
 };
+
 

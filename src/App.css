@@ -469,3 +469,7 @@ footer span i {
   font-size: 14px;
   padding: 0 16px;
 }
+
+.space-right {
+  margin-right: 8px;
+}
