@@ -1,6 +1,6 @@
 # Jenkins Dashboard
 
-### NOTE: You need to be inside the VPN for this app to work.
+### NOTE: *You need to be inside the VPN for this app to work.*
 
 ### Run it
 Open a Terminal and run the following command:
